@@ -34,3 +34,15 @@ while game_is_on:
         car.move()
 
     # Detect collision between turtle and car
+    for car in car_list:
+        if (player.distance(car)) < 25:
+            print("Collision")
+            game_is_on = False
+
+    # Detect when turtle reaches finish line
+    if player.ycor() > 280:
+        print("Finish Line crossed")
+        player.reset_position()
+
+
+screen.exitonclick()
