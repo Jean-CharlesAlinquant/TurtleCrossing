@@ -31,6 +31,8 @@ class CarManager:
     def move_cars(self):
         for car in self.car_list:
             car.backward(self.car_speed)
+            if car.xcor() < -320:
+                self.car_list.remove(car)
 
     def accelerate(self):
         self.car_speed += MOVE_INCREMENT
