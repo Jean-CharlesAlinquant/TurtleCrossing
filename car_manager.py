@@ -12,19 +12,25 @@ BOTTOM = -250
 # (think of it as a safe zone for our little turtle).
 
 
-class CarManager(Turtle):
+class CarManager:
     def __init__(self):
-        super().__init__()
-        self.shape("square")
-        color = random.choice(COLORS)
-        self.color(color)
-        self.penup()
-        self.shapesize(1, 2)
-        start_y = random.randint(BOTTOM, TOP)
-        self.goto(250, start_y)
+        self.car_list = []
+        self.car_speed = STARTING_MOVE_DISTANCE
 
-    def move(self):
-        new_x = self.xcor() - MOVE_INCREMENT
-        self.goto(new_x, self.ycor())
+    def create_car(self):
+        random_chance = random.randint(1, 6)
+        if random_chance == 1:
+            new_car = Turtle("square")
+            new_car.shapesize(1, 2)
+            new_car.penup()
+            new_car.color(random.choice(COLORS))
+            start_y = random.randint(BOTTOM, TOP)
+            new_car.goto(300, start_y)
+            self.car_list.append(new_car)
 
+    def move_cars(self):
+        for car in self.car_list:
+            car.backward(self.car_speed)
 
+    def accelerate(self):
+        self.car_speed += MOVE_INCREMENT
